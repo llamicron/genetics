@@ -1,12 +1,11 @@
 {
-  "command": "crystal",
+  "command": "ruby",
   "tasks": [
     {
       "suppressTaskName": true,
       "taskName": "build",
       "args": [
-        "run",
-        "build.cr"
+        "build.rb"
       ],
       "isBuildCommand": true
     }
