@@ -46,10 +46,32 @@ class Population
     @members.push(member)
   end
 
+  def random_member
+    @members.sample
+  end
+
+  def sort_by_fitness
+    @members.sort_by! {|member| member.fitness}.reverse!
+  end
+
+  # Pool selection. Needs improvement.
   def natural_selection
     # Sort by fitness and keep the top 50 members
-    @members.sort_by! {|member| member.fitness}.reverse!
+    sort_by_fitness
     @members = @members.take(50)
+  end
+
+  def generate
+    new_generation = []
+    @members.each do |member|
+      new_generation.push(member.crossover(random_member))
+    end
+    @members += new_generation
+  end
+
+  def best_member
+    sort_by_fitness
+    return @members[0]
   end
 
 end
