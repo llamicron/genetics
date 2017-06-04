@@ -1,5 +1,4 @@
 require_relative "dna"
-require_relative "fitness"
 
 class Population
 
@@ -9,7 +8,7 @@ class Population
   def initialize
     @members = []
     @starting_population_count = 100
-    @fitness = Fitness.new
+    @fitness = 0.0
 
     generate_starting
   end
@@ -33,18 +32,24 @@ class Population
 
   def calc_fitness
     if is_finished
-      return @fitness.score = 1
+      return @fitness = 1
     end
 
     @members.each do |member|
-      @fitness.score += member.calc_fitness
+      @fitness += member.calc_fitness
     end
-    @fitness.score = @fitness.score / @members.length
+    @fitness = @fitness / @members.length
   end
 
   def add(member)
     raise "Member must be of type DNA" unless member.is_a? DNA
     @members.push(member)
+  end
+
+  def natural_selection
+    # Sort by fitness and keep the top 50 members
+    @members.sort_by! {|member| member.fitness}.reverse!
+    @members = @members.take(50)
   end
 
 end

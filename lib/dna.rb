@@ -1,5 +1,5 @@
 class DNA
-  attr_reader :data
+  attr_reader :data, :fitness
 
   def initialize(phrase)
     @data = phrase
@@ -15,4 +15,5 @@ class DNA
     end
     @fitness = count / $target_phrase.length
   end
+
 end
