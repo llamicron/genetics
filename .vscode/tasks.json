@@ -1,0 +1,14 @@
+{
+  "command": "crystal",
+  "tasks": [
+    {
+      "suppressTaskName": true,
+      "taskName": "build",
+      "args": [
+        "run",
+        "build.cr"
+      ],
+      "isBuildCommand": true
+    }
+  ]
+}
