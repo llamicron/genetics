@@ -1,12 +1,12 @@
+require "pry"
 require_relative "dna"
+require_relative "fitness"
 require_relative "population"
 
 $target_phrase = "VSCode is cool"
-
-
 population = Population.new
-population.add(DNA.new($target_phrase))
-puts "true" if population.is_finished
+
+pry.start
 
 # def evolve
 #   # Key Algo right here
@@ -20,5 +20,3 @@ puts "true" if population.is_finished
 # until population.is_finished
 #   evolve
 # end
-
-# puts population.inspect

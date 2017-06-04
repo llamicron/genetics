@@ -1,19 +1,22 @@
 require_relative "dna"
+require_relative "fitness"
 
 class Population
 
-  attr_reader :members, :overall_fitness
+  attr_reader :fitness
+  attr_accessor :members
 
   def initialize
     @members = []
     @starting_population_count = 100
-    @overall_fitness = 0.0
+    @fitness = Fitness.new
 
     generate_starting
   end
 
   # This is a key method to change when adapting the algo
   def is_finished
+    raise "No target phrase set. Please make a global var called $target_phrase" unless $target_phrase
     @members.each do |member|
       if member.data == $target_phrase
         return true
@@ -29,10 +32,14 @@ class Population
   end
 
   def calc_fitness
-    @members.each do |member|
-      @overall_fitness += member.calc_fitness
+    if is_finished
+      return @fitness.score = 1
     end
-    @overall_fitness = @overall_fitness / @members.length
+
+    @members.each do |member|
+      @fitness.score += member.calc_fitness
+    end
+    @fitness.score = @fitness.score / @members.length
   end
 
   def add(member)

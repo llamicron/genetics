@@ -1,13 +1,24 @@
 {
+  "version": "0.1.0",
   "command": "ruby",
   "tasks": [
     {
       "suppressTaskName": true,
       "taskName": "build",
       "args": [
-        "build.rb"
+        "lib/build.rb"
       ],
       "isBuildCommand": true
+    },
+    {
+      "taskName": "test",
+      "command": "rspec",
+      "args": [
+        "spec/population_spec.rb"
+        // "spec/dna_spec.rb"
+      ],
+      "isTestCommand": true,
+      "showOutput": "always"
     }
   ]
 }
