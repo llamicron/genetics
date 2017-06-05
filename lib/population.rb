@@ -17,21 +17,20 @@ class Population
     return members
   end
 
-  # def is_finished
-  #   raise "No target phrase set. Please make a global var called $target_phrase" unless $target_phrase
-  #
-  #   if $finished == true
-  #     return true
-  #   end
-  #
-  #   @members.each do |member|
-  #     if member.data == $target_phrase
-  #       $finished = true
-  #       return true
-  #     end
-  #   end
-  #   return false
-  # end
+  def is_finished
+    raise "No target phrase set. Please make a global var called $target_phrase" unless $target_phrase
+
+    @members.each do |member|
+      if member.fitness == 1
+        return true
+      end
+      # if member.data == $target_phrase
+      #   $finished = true
+      #   return true
+      # end
+    end
+    return false
+  end
   #
   # def calc_fitness
   #   if is_finished

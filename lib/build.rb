@@ -4,8 +4,7 @@ require_relative "population"
 
 $target_phrase = "VSCode is cool"
 
-population = Population.new
-puts population.members
+# population = Population.new
 # until population.is_finished
 #   population.evolve
 # end
