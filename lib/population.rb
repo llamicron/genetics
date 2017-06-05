@@ -9,15 +9,21 @@ class Population
     @members = []
     @starting_population_count = 100
     @fitness = 0.0
+    $finished = false
 
     generate_starting
   end
 
-  # This is a key method to change when adapting the algo
   def is_finished
     raise "No target phrase set. Please make a global var called $target_phrase" unless $target_phrase
+
+    if $finished == true
+      return true
+    end
+
     @members.each do |member|
       if member.data == $target_phrase
+        $finished = true
         return true
       end
     end
@@ -25,6 +31,8 @@ class Population
   end
 
   def generate_starting
+    # Populate with members with random data
+    # Data are strings of equal length to the target string
     @starting_population_count.times do
       @members.push(DNA.new(('a'..'z').to_a.shuffle[0,$target_phrase.length].join))
     end
@@ -54,11 +62,14 @@ class Population
     @members.sort_by! {|member| member.fitness}.reverse!
   end
 
-  # Pool selection. Needs improvement.
   def natural_selection
-    # Sort by fitness and keep the top 50 members
-    sort_by_fitness
-    @members = @members.take(50)
+    while true do
+      member = @members.sample
+      r = rand(0..100)
+      if r < member.fitness * 100
+        return member
+      end
+    end
   end
 
   def generate
@@ -66,7 +77,7 @@ class Population
     @members.each do |member|
       new_generation.push(member.crossover(random_member))
     end
-    @members += new_generation
+    @members = new_generation
   end
 
   def best_member

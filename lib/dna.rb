@@ -5,6 +5,8 @@ class DNA
   def initialize(data)
     @data = data
     @fitness = 0.0
+
+    calc_fitness
   end
 
   def calc_fitness
@@ -14,7 +16,22 @@ class DNA
         count += 1.0
       end
     end
+
     @fitness = count / $target_phrase.length
+
+    if @fitness == 1.0
+      data_copy = @data.dup
+      data_copy.slice! $target_phrase
+      if data_copy.empty?
+        $finished = true
+        return true
+      else
+        data_copy.each_char do
+          @fitness -= 1.0 / $target_phrase.length
+        end
+      end
+    end
+    return @fitness
   end
 
   def crossover(parent)
