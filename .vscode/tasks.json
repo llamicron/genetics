@@ -14,8 +14,8 @@
       "taskName": "test",
       "command": "rspec",
       "args": [
-        "spec/population_spec.rb"
-        // "spec/dna_spec.rb"
+        "spec/population_spec.rb",
+        "spec/dna_spec.rb"
       ],
       "isTestCommand": true,
       "showOutput": "always"

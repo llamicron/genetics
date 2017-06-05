@@ -9,7 +9,9 @@ class DNA
     calc_fitness
   end
 
+  # TODO: extract this to more methods
   def calc_fitness
+    raise "target phrase is not yet set" unless $target_phrase
     count = 0.0
     $target_phrase.length.times do |position|
       if @data[position] == $target_phrase[position]
@@ -34,17 +36,17 @@ class DNA
     return @fitness
   end
 
-  def crossover(parent)
-    child_data = ""
-    @data.length.times do |x|
-      if @data[x] == $target_phrase[x]
-        child_data += @data[x]
-      end
-      if parent.data[x] == $target_phrase[x]
-        child_data += parent.data[x]
-      end
-    end
-    return DNA.new(child_data)
-  end
+  # def crossover(parent)
+  #   child_data = ""
+  #   @data.length.times do |x|
+  #     if @data[x] == $target_phrase[x]
+  #       child_data += @data[x]
+  #     end
+  #     if parent.data[x] == $target_phrase[x]
+  #       child_data += parent.data[x]
+  #     end
+  #   end
+  #   return DNA.new(child_data)
+  # end
 
 end
